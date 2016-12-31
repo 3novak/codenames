@@ -198,10 +198,22 @@ if __name__ == '__main__':
 
     # while we are still developing, this provides a master view of the board
     # including which words are in play and each word's affilation.
-    for i in board:
-        print(i.value, i.card_type)
+    values = [tile.value for tile in board]
+    affiliations = [tile.card_type for tile in board]
+
+    spymaster_view = [affiliations[i: i + len(affiliations)//5] for i in range(0, len(affiliations), len(affiliations)//5)]
+    plebian_view = [values[i: i + len(values)//5] for i in range(0, len(values), len(values)//5)]
+
+    print('SPYMASTER GRID')
+    for row in spymaster_view:
+        print(row)
+
+    print('\n\n\n\n\n\n\n\n\n\n\n\nPLEBIAN GRID')
+    for row in plebian_view:
+        print(row)
+    print('\n\n\n\n\n')
 
     # let the games begin! begins the game and prints the outcome.
     print(turn(team='RED', tiles=board, scoreboard=score, max_scores=max_scores))
 
-    # todo: add a help command
+    # TODO: add a help command
